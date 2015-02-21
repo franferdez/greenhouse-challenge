@@ -1,12 +1,11 @@
-/*global define*/
+'use strict';
 
 define([
     'underscore',
     'backbone'
 ], function (_, Backbone) {
-    'use strict';
 
-    var BaseModelModel = Backbone.Model.extend({
+    var BaseModel = Backbone.Model.extend({
         url: '',
 
         initialize: function() {
@@ -23,5 +22,5 @@ define([
         }
     });
 
-    return BaseModelModel;
+    return BaseModel;
 });

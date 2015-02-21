@@ -13,11 +13,13 @@ require.config({
         JSXTransformer: 'JSXTransformer'
     },
     paths: {
+        g: 'global',
         routes: 'routes',
         views: 'views',
         templates: 'templates',
         models: 'models',
         collections: 'collections',
+        vendor: 'vendor',
         jquery: '../bower_components/jquery/dist/jquery',
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/lodash/dist/lodash',
@@ -38,10 +40,17 @@ require.config({
 });
 
 require([
+    'g',
     'backbone',
-    'jsx!views/app'
-], function (Backbone,App) {
+    'jsx!views/app',
+    'models/TestModel',
+    'text!vendor/test.json'
+], function (g,Backbone,App,TestModel,json) {
     Backbone.history.start();
     var app = new App();
     app.render();
+
+    // Normally i use model.fetch() but in this case i cant use an ajax call because of the cross-domain policy
+    var model = new TestModel(JSON.parse(json));
+    
 });

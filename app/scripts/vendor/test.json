@@ -1,0 +1,136 @@
+{
+  "id" : "TEST-1",
+  "title" : "Browser Statistics and Trends (based on http://www.w3schools.com/browsers/browsers_mobile.asp)",
+  "questions" : [
+    {
+      "id" : "QUES-1",
+      "title" : "Question 1 - Browser",
+      "text" : "Which is the most used browser nowadays?",
+      "options" : [
+        {
+          "id" : "ANSW-1",
+          "text" : "Google Chrome"
+        },
+        {
+          "id" : "ANSW-2",
+          "text" : "Internet Explorer"
+        },
+        {
+          "id" : "ANSW-3",
+          "text" : "Mozilla Firefox"
+        },
+        {
+          "id" : "ANSW-4",
+          "text" : "Safari"
+        }
+      ]
+    },
+    {
+      "id" : "QUES-2",
+      "title" : "Question 2 - Screen Resolution",
+      "text" : "Which is the most used screen resolution to access websites?",
+      "options" : [
+        {
+          "id" : "ANSW-5",
+          "text" : "1024x768"
+        },
+        {
+          "id" : "ANSW-6",
+          "text" : "1280x1024"
+        },
+        {
+          "id" : "ANSW-7",
+          "text" : "1366x768"
+        },
+        {
+          "id" : "ANSW-8",
+          "text" : "1920x1080"
+        }
+      ]
+    },
+    {
+      "id" : "QUES-3",
+      "title" : "Question 3 - Desktop OS",
+      "text" : "Which is the most used OS in desktop devices?",
+      "options" : [
+        {
+          "id" : "ANSW-9",
+          "text" : "Windows 8"
+        },
+        {
+          "id" : "ANSW-10",
+          "text" : "Windows 7"
+        },
+        {
+          "id" : "ANSW-11",
+          "text" : "iOS (any version)"
+        },
+        {
+          "id" : "ANSW-12",
+          "text" : "Linux (any distro/version)"
+        }
+      ]
+    },
+    {
+      "id" : "QUES-4",
+      "title" : "Question 4 - Mobile OS",
+      "text" : "Which is the most used OS in mobile devices?",
+      "options" : [
+        {
+          "id" : "ANSW-13",
+          "text" : "Android"
+        },
+        {
+          "id" : "ANSW-14",
+          "text" : "iOS"
+        },
+        {
+          "id" : "ANSW-15",
+          "text" : "Windows"
+        },
+        {
+          "id" : "ANSW-16",
+          "text" : "Blackberry"
+        }
+      ]
+    }
+  ],
+  "solution" : {
+    "QUES-1": {
+      "value" : 40,
+      "answers" : {
+        "ANSW-1": 100,
+        "ANSW-2": 0,
+        "ANSW-3": 50,
+        "ANSW-4": 10
+      }
+    },
+    "QUES-2": {
+      "value" : 20,
+      "answers" : {
+        "ANSW-5": 10,
+        "ANSW-6": 20,
+        "ANSW-7": 100,
+        "ANSW-8": 50
+      }
+    },
+    "QUES-3": {
+      "value" : 30,
+      "answers" : {
+        "ANSW-9": 50,
+        "ANSW-10": 100,
+        "ANSW-11": 10,
+        "ANSW-12": 0
+      }
+    },
+    "QUES-4": {
+      "value" : 10,
+      "answers" : {
+        "ANSW-13": 100,
+        "ANSW-14": 60,
+        "ANSW-15": 10,
+        "ANSW-16": 0
+      }
+    }
+  }
+}

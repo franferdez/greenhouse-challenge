@@ -1,14 +1,13 @@
-/*global define*/
+'use strict';
 
 define([
     'underscore',
     'backbone',
-    'models/BaseCollection'
-], function (_, Backbone, BaseCollectionModel) {
-    'use strict';
+    'models/BaseModel'
+], function (_, Backbone, BaseModel) {
 
     var BaseCollectionCollection = Backbone.Collection.extend({
-        model: BaseCollectionModel
+        model: BaseModel
     });
 
     return BaseCollectionCollection;
