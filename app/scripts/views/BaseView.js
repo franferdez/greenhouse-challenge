@@ -3,12 +3,11 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
-    'templates'
+    'backbone'
 ], function ($, _, Backbone, JST) {
     
     var BaseViewView = Backbone.View.extend({
-        template: JST['app/scripts/templates/BaseView.ejs'],
+        //template: JST['app/scripts/templates/BaseView.ejs'],
 
         tagName: 'div',
 
