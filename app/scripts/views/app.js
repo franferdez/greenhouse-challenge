@@ -12,21 +12,32 @@ define(function(require){
 
     var QuestionsView = React.createClass({   
       render: function () {
-        var questions = this.props.questions;
+        var questions = this.props.questions || []; 
         return (
-            <ul>
-                <li>
-                    <p>Pregunta:</p>
-                    <ul>
-                        {questions.map(function(result) {
-                          return <li key={result.id}>
-                                    <p>{result.title}</p>
-                                    <p>{result.text}</p>
-                                 </li>;
-                        })}
-                    </ul>
-                </li>
-            </ul>
+                <ul>
+                    {questions.map(function(result) {
+                      return <li key={result.id}>
+                                <p>{result.title}</p>
+                                <p>{result.text}</p>
+                                <OptionsView options={result.options} />
+                             </li>;
+                    })}
+                </ul>
+        );
+      }
+    });
+
+    var OptionsView = React.createClass({   
+      render: function () {
+        var options = this.props.options || [];
+        return (
+                <ul>
+                    {options.map(function(result) {
+                      return <li key={result.id}>
+                                <p>{result.text}</p>
+                             </li>;
+                    })}
+                </ul>
         );
       }
     });
