@@ -1,32 +1,25 @@
-/*global define*/
+'use strict';
 
-define([
-    'jquery',
-    'underscore',
-    'backbone',
-    'templates'
-], function ($, _, Backbone, JST) {
-    'use strict';
+define(function(require){
 
-    var AppView = Backbone.View.extend({
-        template: JST['app/scripts/templates/app.ejs'],
+  var React = require('react');
 
-        tagName: 'div',
-
-        id: '',
-
-        className: '',
-
-        events: {},
-
-        initialize: function () {
-            this.listenTo(this.model, 'change', this.render);
-        },
-
-        render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-        }
+  function App() {
+    this.AppView = React.createClass({
+      render: function () {
+        return (
+          <div>
+            <p>Hello, React!</p>
+          </div>
+        );
+      }
     });
+  }
 
-    return AppView;
+  App.prototype.render = function () {
+    React.renderComponent(<this.AppView />, document.body);
+  };
+
+  return App;
+
 });
