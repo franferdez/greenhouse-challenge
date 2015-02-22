@@ -20,7 +20,7 @@ define(function(require){
                       return <li key={result.id}>
                                 <p>{result.title}</p>
                                 <p>{result.text}</p>
-                                <OptionsView  id={result.id} options={result.options} />
+                                <OptionsView  id={result.id} collection={result.options} />
                              </li>;
                     })}
                 </ul>
@@ -32,7 +32,7 @@ define(function(require){
       mixins: [backboneMixin],  
       render: function () {
         var questionId = this.props.id
-        var options = this.props.options || [];
+        var options = this.props.collection || [];
         return (
                 <ul>
                     {options.map(function(result) {
@@ -107,7 +107,8 @@ define(function(require){
 
   App.prototype.render = function () {
     // Normally i use model.fetch() but in this case i cant use an ajax call because of the cross-domain policy
-    var model = new TestModel(TestModel.prototype.parse(JSON.parse(json)));
+    var model = new TestModel(JSON.parse(json));
+    console.log(model);
         
     //closure to apply callback on react change state. 
     var doCalculation = function(){

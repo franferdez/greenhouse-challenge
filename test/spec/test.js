@@ -18,18 +18,33 @@ define(function(require) {
 	        });
 	 
 	        it('should be an instance of TestModel', function() {
-				var model = new TestModel(TestModel.prototype.parse(JSON.parse(json)));
+				var model = new TestModel(JSON.parse(json));
 	            expect(model).to.be.an.instanceof(TestModel);
 	        });
 
 	        it('should be an instance of QuestionCollection', function() {
-				var model = new TestModel(TestModel.prototype.parse(JSON.parse(json)));
+				var model = new TestModel(JSON.parse(json));
 	            expect(model.get('questions')).to.be.an.instanceof(QuestionCollection);
 	        });
 
 	        it('should get a particular Question', function() {
-				var model = new TestModel(TestModel.prototype.parse(JSON.parse(json)));
+				var model = new TestModel(JSON.parse(json));
 	            expect(model.get('questions').get('QUES-1')).to.be.an.instanceof(QuestionModel);
+	        });
+	        
+	        it('should get a instance of OptionsCollection', function() {
+				var model = new TestModel(JSON.parse(json));
+	            expect(model.get('questions').get('QUES-1').get('options')).to.be.an.instanceof(OptionsCollection);
+	        });
+
+	        it('should get a particular OptionModel', function() {
+				var model = new TestModel(JSON.parse(json));
+	            expect(model.get('questions').get('QUES-1').get('options').get('ANSW-2')).to.be.an.instanceof(OptionModel);
+	        });
+
+	        it('OptionModel should have checked field', function() {
+				var model = new TestModel(JSON.parse(json));
+	            expect(model.get('questions').get('QUES-1').get('options').get('ANSW-2').attributes.checked).to.exist;
 	        });
 	 
 	    });

@@ -12,7 +12,7 @@ define([
         model: OptionModel,
 
         initialize: function() {
-        },
+        }
 
     });
 

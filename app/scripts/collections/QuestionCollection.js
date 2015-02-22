@@ -4,15 +4,16 @@ define([
     'underscore',
     'backbone',
     'collections/BaseCollection',
-    'models/QuestionModel'
-], function (_, Backbone, BaseCollection,QuestionModel) {
+    'models/QuestionModel',
+    'collections/OptionsCollection'
+], function (_, Backbone, BaseCollection,QuestionModel,OptionsCollection) {
 
     var QuestionCollection = BaseCollection.extend({
 
         model: QuestionModel,
 
         initialize: function() {
-        },
+        }
 
     });
 
