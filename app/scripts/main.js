@@ -48,5 +48,4 @@ require([
     Backbone.history.start();
     var app = new App();
     app.render();
-    
 });

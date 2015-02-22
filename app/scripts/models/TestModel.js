@@ -5,7 +5,7 @@ define([
     'backbone',
     'models/BaseModel',
     'collections/QuestionCollection'
-], function (_, Backbone, BaseModel) {
+], function (_, Backbone, BaseModel,QuestionCollection) {
 
     var TestModel = BaseModel.extend({
 
@@ -15,12 +15,14 @@ define([
         defaults: {
             id: 0,
             title: '',
-            questions: [],
+            questions: {},
             solution: {}
         },
 
         parse: function(response)  {
+            console.log('response',response);
             response.questions = new QuestionCollection(response.questions);
+            console.log('response',response);
             return response;
         },
 

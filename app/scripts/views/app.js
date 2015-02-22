@@ -10,9 +10,10 @@ define(function(require){
   function App() {
 
 
-    var QuestionsView = React.createClass({   
+    var QuestionsView = React.createClass({
+      mixins: [backboneMixin],   
       render: function () {
-        var questions = this.props.questions || []; 
+        var questions = this.props.collection || []; 
         return (
                 <ul>
                     {questions.map(function(result) {
@@ -27,7 +28,8 @@ define(function(require){
       }
     });
 
-    var OptionsView = React.createClass({   
+    var OptionsView = React.createClass({ 
+      mixins: [backboneMixin],  
       render: function () {
         var questionId = this.props.id
         var options = this.props.options || [];
@@ -72,7 +74,7 @@ define(function(require){
                 <h3 className="panel-title">Test: {this.props.title}</h3>
               </header>
               <article className="panel-body">
-                    <QuestionsView questions={this.props.questions} />
+                    <QuestionsView collection={this.props.questions} />
               </article>
               <footer className="panel-footer">
                 <button type="button" className="btn btn-danger">Reset</button>
@@ -105,9 +107,8 @@ define(function(require){
 
   App.prototype.render = function () {
     // Normally i use model.fetch() but in this case i cant use an ajax call because of the cross-domain policy
-    var model = new TestModel(JSON.parse(json));
-    console.log(model);
-
+    var model = new TestModel(TestModel.prototype.parse(JSON.parse(json)));
+        
     //closure to apply callback on react change state. 
     var doCalculation = function(){
       model.calculateResults();
