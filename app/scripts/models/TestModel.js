@@ -22,6 +22,10 @@ define([
         parse: function(response)  {
             response.questions = new QuestionCollection(response.questions);
             return response;
+        },
+
+        calculateResults: function(){
+            console.log('calculation in progress...');
         }
     });
 

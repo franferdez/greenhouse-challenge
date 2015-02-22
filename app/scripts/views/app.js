@@ -58,6 +58,7 @@ define(function(require){
       },
 
       doResults: function() {
+          this.props.doCalculation();
           this.setState({
               step: 'results'
           });
@@ -105,8 +106,14 @@ define(function(require){
   App.prototype.render = function () {
     // Normally i use model.fetch() but in this case i cant use an ajax call because of the cross-domain policy
     var model = new TestModel(JSON.parse(json));
-    console.log(model.toJSON());
-    React.render(<this.AppView model={model} />, $('#main-content')[0]);
+    console.log(model);
+
+    //closure to apply callback on react change state. 
+    var doCalculation = function(){
+      model.calculateResults();
+    };
+
+    React.render(<this.AppView model={model} doCalculation={doCalculation} />, $('#main-content')[0]);
   };
 
   return App;
