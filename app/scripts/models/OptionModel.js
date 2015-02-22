@@ -7,23 +7,17 @@ define([
     'collections/OptionsCollection'
 ], function (_, Backbone, BaseModel) {
 
-    var QuestionModel = BaseModel.extend({
+    var OptionModel = BaseModel.extend({
 
         initialize: function() {
         },
 
         defaults: {
             id: 0,
-            title: '',
             text: '',
-            options: {}
-        },
-
-        parse: function(response)  {
-            response.options = new OptionsCollection(response.options);
-            return response;
+            checked: false
         }
     });
 
-    return QuestionModel;
+    return OptionModel;
 });

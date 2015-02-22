@@ -19,7 +19,7 @@ define(function(require){
                       return <li key={result.id}>
                                 <p>{result.title}</p>
                                 <p>{result.text}</p>
-                                <OptionsView options={result.options} />
+                                <OptionsView  id={result.id} options={result.options} />
                              </li>;
                     })}
                 </ul>
@@ -29,13 +29,19 @@ define(function(require){
 
     var OptionsView = React.createClass({   
       render: function () {
+        var questionId = this.props.id
         var options = this.props.options || [];
         return (
                 <ul>
                     {options.map(function(result) {
                       return <li key={result.id}>
-                                <p>{result.text}</p>
-                             </li>;
+                                 <div className="radio">
+                                  <label>
+                                    <input type="radio" name={questionId} id="optionsRadios{result.id}" value={result.id} checked={result.checked} />
+                                    {result.text}
+                                  </label>
+                                </div>
+                            </li>;
                     })}
                 </ul>
         );
@@ -44,8 +50,22 @@ define(function(require){
 
     this.AppView = React.createClass({
       mixins: [backboneMixin],
+
+      getInitialState: function() {
+          return {
+              step: 'test'
+          };
+      },
+
+      doResults: function() {
+          this.setState({
+              step: 'results'
+          });
+      },
+
       render: function () {
-        return (
+        if(this.state.step==='test'){
+          return (
             <section className="panel panel-primary">
               <header className="panel-heading">
                 <h3 className="panel-title">Test: {this.props.title}</h3>
@@ -53,8 +73,28 @@ define(function(require){
               <article className="panel-body">
                     <QuestionsView questions={this.props.questions} />
               </article>
+              <footer className="panel-footer">
+                <button type="button" className="btn btn-danger">Reset</button>
+                <button type="button" className="btn btn-success" onClick={this.doResults}>Complete Test</button>
+              </footer>
             </section>
-        );
+          );
+        }else{
+          return (
+            <section className="panel panel-primary">
+              <header className="panel-heading">
+                <h3 className="panel-title">Test: {this.props.title}</h3>
+              </header>
+              <article className="panel-body">
+              results
+              </article>
+              <footer className="panel-footer">
+
+              </footer>
+            </section>
+          );
+        }
+        
       }
     });
 
