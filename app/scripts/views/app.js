@@ -2,25 +2,29 @@
 
 define(function(require){
   var $ = require('jquery');
+  var _ = require('underscore');
   var React = require('react');
   var TestModel = require('models/TestModel');
   var json = require('text!vendor/test.json');
   var backboneMixin = require('backboneMixin');
+  var reactBackbone = require('reactBackbone');
+
+  //import the backbone mixins
+  reactBackbone(React, Backbone, _, $);
 
   function App() {
 
-
     var QuestionsView = React.createClass({
-      mixins: [backboneMixin],   
+      //mixins: [backboneMixin],   
       render: function () {
         var questions = this.props.collection || []; 
         return (
                 <ul>
-                    {questions.map(function(result) {
-                      return <li key={result.id}>
-                                <p>{result.title}</p>
-                                <p>{result.text}</p>
-                                <OptionsView  id={result.id} collection={result.options} />
+                    {questions.map(function(questionModel) {
+                      return <li key={questionModel.get('id')}>
+                                <p>{questionModel.get('title')}</p>
+                                <p>{questionModel.get('text')}</p>
+                                <OptionsView model={questionModel}/>
                              </li>;
                     })}
                 </ul>
@@ -29,24 +33,34 @@ define(function(require){
     });
 
     var OptionsView = React.createClass({ 
-      mixins: [backboneMixin],  
+      //mixins: [backboneMixin],
+      render: function () {
+        var RadioGroup = Backbone.input.RadioGroup,
+            questionModel = this.props.model,
+            optionsCollection = this.props.model.get('options') || [];
+        return (
+          <RadioGroup name="selected" model={questionModel}>
+            {optionsCollection.map(function(optionModel) {
+                  return <OptionView id={questionModel.get('id')} model={optionModel} />    
+            })}
+          </RadioGroup>       
+        );
+      }
+    });
+
+    var OptionView = React.createClass({ 
+      //mixins: [backboneMixin], 
       render: function () {
         var questionId = this.props.id
-        var options = this.props.collection || [];
+        var model = this.props.model;
         return (
-                <ul>
-                    {options.map(function(result) {
-                      return <li key={result.id}>
-                                 <div className="radio">
-                                  <label>
-                                    <input type="radio" name={questionId} id="optionsRadios{result.id}" value={result.id} checked={result.checked} />
-                                    {result.text}
-                                  </label>
-                                </div>
-                            </li>;
-                    })}
-                </ul>
-        );
+                       <div className="radio">
+                        <label>
+                          <input type="radio" name={questionId} id="optionsRadios{result.id}" value={model.get('id')}   />
+                          {model.get('text')}
+                        </label>
+                      </div>
+                );
       }
     });
 
@@ -100,7 +114,6 @@ define(function(require){
         
       }
     });
-
 
   }
 

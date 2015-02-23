@@ -26,11 +26,8 @@ define([
                 value = 0;
 
             for (var i = 0, len = questions.length ; i < len; i += 1) {
-                var options = questions[i].get('options');
-                for (var h = 0, len2 = options.length ; h < len2; h += 1) {
-                    var value = options[i];
-                    console.log('value', value);
-                }
+                var options = questions[i].get('options').models;
+                console.log('selected',questions[i].get('selected'));
             }
         }
     });

@@ -13,9 +13,8 @@ define([
         },
 
         defaults: {
-            id: 0,
-            text: '',
-            checked: false
+            id: '',
+            text: ''
         }
     });
 

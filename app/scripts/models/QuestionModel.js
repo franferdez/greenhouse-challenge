@@ -14,9 +14,10 @@ define([
         },
 
         defaults: {
-            id: 0,
+            id: '',
             title: '',
             text: '',
+            selected: '', 
             options: []
         }
     });
