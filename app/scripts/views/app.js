@@ -15,8 +15,8 @@ define(function(require){
   function App() {
 
     var QuestionsView = React.createClass({
-      //mixins: [backboneMixin],   
       render: function () {
+        var step = this.props.step;
         var questions = this.props.collection || []; 
         return (
                 <ul>
@@ -24,7 +24,7 @@ define(function(require){
                       return <li key={questionModel.get('id')}>
                                 <p>{questionModel.get('title')}</p>
                                 <p>{questionModel.get('text')}</p>
-                                <OptionsView model={questionModel}/>
+                                <OptionsView model={questionModel} step={step}/>
                              </li>;
                     })}
                 </ul>
@@ -33,7 +33,6 @@ define(function(require){
     });
 
     var OptionsView = React.createClass({ 
-      //mixins: [backboneMixin],
       mixins: ['modelAware'],
       render: function () {
         var RadioGroup = Backbone.input.RadioGroup,
@@ -50,18 +49,23 @@ define(function(require){
     });
 
     var OptionView = React.createClass({ 
-      //mixins: [backboneMixin], 
       render: function () {
         var questionId = this.props.id
         var model = this.props.model;
         return (
                        <div className="radio">
                         <label>
-                          <input type="radio"  value={model.get('id')}   />
+                          <input type="radio" name={'radio' + questionId} value={model.get('id')}   />
                           {model.get('text')}
                         </label>
                       </div>
                 );
+      }
+    });
+
+    var TestView = React.createClass({ 
+      render: function (){
+        return (<div></div>);
       }
     });
 
@@ -89,7 +93,7 @@ define(function(require){
                 <h3 className="panel-title">Test: {this.props.title}</h3>
               </header>
               <article className="panel-body">
-                    <QuestionsView collection={this.props.questions} />
+                    <QuestionsView collection={this.props.questions} step={this.state.step} />
               </article>
               <footer className="panel-footer">
                 <button type="button" className="btn btn-danger">Reset</button>
@@ -98,21 +102,8 @@ define(function(require){
             </section>
           );
         }else{
-          return (
-            <section className="panel panel-primary">
-              <header className="panel-heading">
-                <h3 className="panel-title">Test: {this.props.title}</h3>
-              </header>
-              <article className="panel-body">
-              results
-              </article>
-              <footer className="panel-footer">
 
-              </footer>
-            </section>
-          );
         }
-        
       }
     });
 
