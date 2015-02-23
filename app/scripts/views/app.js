@@ -34,12 +34,13 @@ define(function(require){
 
     var OptionsView = React.createClass({ 
       //mixins: [backboneMixin],
+      mixins: ['modelAware'],
       render: function () {
         var RadioGroup = Backbone.input.RadioGroup,
             questionModel = this.props.model,
             optionsCollection = this.props.model.get('options') || [];
         return (
-          <RadioGroup name="selected" model={questionModel}>
+          <RadioGroup name="selected" model={questionModel} bind={true}>
             {optionsCollection.map(function(optionModel) {
                   return <OptionView id={questionModel.get('id')} model={optionModel} />    
             })}
@@ -56,7 +57,7 @@ define(function(require){
         return (
                        <div className="radio">
                         <label>
-                          <input type="radio" name={questionId} id="optionsRadios{result.id}" value={model.get('id')}   />
+                          <input type="radio"  value={model.get('id')}   />
                           {model.get('text')}
                         </label>
                       </div>

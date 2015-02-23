@@ -26,8 +26,12 @@ define([
                 value = 0;
 
             for (var i = 0, len = questions.length ; i < len; i += 1) {
-                var options = questions[i].get('options').models;
-                console.log('selected',questions[i].get('selected'));
+                var question = questions[i],
+                    solution  = this.get('solution')[question.get('id')],
+                    //cross-multiplication
+                    points = solution.value * solution.answers[question.get('selected')] / 100;
+
+                    console.log('points', points);
             }
         }
     });
