@@ -12,8 +12,7 @@ define(function(require){
   reactBackbone(React, Backbone, _, $);
 
   function App() {
-    var model = g.testModel;
-    
+ 
     var LandingView = React.createClass({ 
       render: function (){ 
         return ( 
@@ -39,7 +38,7 @@ define(function(require){
       },
 
       doResults: function() {
-          this.props.doCalculation();
+          g.testModel.calculateResults();
           this.setState({
               step: 'results'
           });
@@ -49,7 +48,7 @@ define(function(require){
         if(this.state.step==='initial'){
           return (<LandingView state={this.state} startTest={this.startTest} />);    
         }else{
-          return (<TestView step={this.state.step} model={model} doResults={this.doResults} />);
+          return (<TestView step={this.state.step} model={this.props.model} doResults={this.doResults} />);
         }
       }
     });
@@ -60,12 +59,8 @@ define(function(require){
   App.prototype.render = function () {
     var model = g.testModel;
         
-    //closure to apply callback on react change state. 
-    var doCalculation = function(){
-      g.testModel.calculateResults();
-    };
 
-    React.render(<this.AppView model={model} doCalculation={doCalculation} />, $('#main-content')[0]);
+    React.render(<this.AppView model={model} />, $('#main-content')[0]);
   };
 
   return App;

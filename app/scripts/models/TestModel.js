@@ -48,8 +48,7 @@ define([
                 question.set('correctAnswer',_.invert(solution.answers)[100]);
 
             }
-            this.set('total'.acum);
-            console.log('total',acum);
+            this.set('total', acum);
         }
     });
 

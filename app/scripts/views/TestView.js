@@ -96,26 +96,32 @@ define(function(require){
       }
     });
 
-    var TestView = React.createClass({
-      mixins: ['modelChangeAware'],
+    var TestFooter = React.createClass({
+      mixins: ['modelAware'],
 
       render: function (){
         var model = this.props.model;
 
-        console.log('model total',model.get('total'));
-        var partial = {};
         if(this.props.step === 'test'){
-          partial = <footer className="panel-footer">
-                      <button type="button" className="btn btn-success" onClick={this.props.doResults}>Complete Test</button>
-                    </footer>
+          return( 
+            <footer className="panel-footer">
+              <button type="button" className="btn btn-success" onClick={this.props.doResults}>Complete Test</button>
+            </footer>
+          );
         }else{
+          return(
+            <footer className="panel-footer jumbotron">
+              <h2>Total:</h2>
+              <ProgressBarComponent percentage={model.get('total')} />
+            </footer>
+          );
+        }         
+      }
+    });
 
-          partial =  <footer className="panel-footer jumbotron">
-                        <h2>Total:</h2>
-                        <ProgressBarComponent percentage={model.get('total')} />
-                     </footer>
-        }
-
+    var TestView = React.createClass({
+      render: function (){
+        var model = this.props.model;
         return ( 
           <section className="panel panel-primary">
               <header className="panel-heading">
@@ -124,7 +130,7 @@ define(function(require){
               <article className="panel-body">
                     <QuestionsView collection={model.get('questions')} step={this.props.step} />
               </article>
-              {partial}
+              <TestFooter doResults = {this.props.doResults} step = {this.props.step} model={this.props.model} />
           </section>
         );
       }
