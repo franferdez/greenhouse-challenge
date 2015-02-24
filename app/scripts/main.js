@@ -13,7 +13,6 @@ require.config({
         JSXTransformer: 'JSXTransformer'
     },
     paths: {
-        g: 'global',
         routes: 'routes',
         views: 'views',
         templates: 'templates',
@@ -42,10 +41,10 @@ require.config({
 });
 
 require([
-    'g',
+    'global',
     'backbone',
     'jsx!views/app'
-], function (g,Backbone,App,TestModel,json) {
+], function (g,Backbone,App) {
     Backbone.history.start();
     var app = new App();
     app.render();

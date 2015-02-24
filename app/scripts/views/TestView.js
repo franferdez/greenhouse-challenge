@@ -4,6 +4,8 @@ define(function(require){
 
   var $ = require('jquery'),
       _ = require('underscore'),
+      g = require('global'),
+      Backbone = require('backbone'),
       React = require('react'),
       reactBackbone = require('reactBackbone'), 
       ProgressBarComponent = require('jsx!components/ProgressBarComponent');
@@ -32,7 +34,7 @@ define(function(require){
         var partial = {};
 
         if(step==='results'){
-          partial = <ProgressBarComponent percentage={model.get('pointsPercentage')} />
+          partial = <ProgressBarComponent percentage={model.get('points')} />
         }
         return (<li key={model.get('id')}>
                                 <h3>{model.get('title')}</h3>
@@ -73,19 +75,17 @@ define(function(require){
             // if we are in results step
             if(this.props.parent.get('correctAnswer') === model.get('id')){
               //highlight the correct answer
-              status = ' bg-success';
               partial = <span className="glyphicon glyphicon-ok" aria-hidden="true" />; 
             }else{
               if(this.props.parent.get('selected') === model.get('id')){
                 //highlight the wrong answer
-                status = ' bg-danger';
                 partial = <span className="glyphicon glyphicon-remove" aria-hidden="true" />;
               }
             }
         }
 
         return (
-            <div className={'radio' + status}>
+            <div className='radio'>
               <label>
                 <input type="radio" name={'radio' + questionId} value={model.get('id')} disabled={step === 'results'? 'disabled': ''}/>
                 {model.get('text')}
@@ -96,15 +96,24 @@ define(function(require){
       }
     });
 
-    var TestView = React.createClass({ 
+    var TestView = React.createClass({
+      mixins: ['modelChangeAware'],
+
       render: function (){
         var model = this.props.model;
 
+        console.log('model total',model.get('total'));
         var partial = {};
         if(this.props.step === 'test'){
           partial = <footer className="panel-footer">
                       <button type="button" className="btn btn-success" onClick={this.props.doResults}>Complete Test</button>
                     </footer>
+        }else{
+
+          partial =  <footer className="panel-footer jumbotron">
+                        <h2>Total:</h2>
+                        <ProgressBarComponent percentage={model.get('total')} />
+                     </footer>
         }
 
         return ( 

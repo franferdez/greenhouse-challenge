@@ -33,13 +33,21 @@ define(function(require){
         },
         
         render: function(){
-          var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-          var percentage = this.props.percentage;
+          var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup,
+              percentage = this.props.percentage || 0,
+              colorClass = 'progress-bar-danger';
+
+              if(percentage>30){
+                  colorClass = 'progress-bar-warning';
+                  if(percentage>60){
+                     colorClass = 'progress-bar-success';
+                  }
+              }
 
           return(
             <ReactCSSTransitionGroup transitionName="bar">
               <div className="progress">
-                <div className="progress-bar" role="progressbar" aria-valuenow={percentage} aria-valuemin="0" aria-valuemax="100" style={{width : this.state.percentage+'%'}}>
+                <div className={"progress-bar " + colorClass} role="progressbar" aria-valuenow={percentage} aria-valuemin="0" aria-valuemax="100" style={{width : this.state.percentage+'%'}}>
                   {this.state.percentage + '%'}
                 </div>
               </div>

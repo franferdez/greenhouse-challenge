@@ -3,17 +3,17 @@
 define(function(require){
   var $ = require('jquery'),
       _ = require('underscore'),
+      g = require('global'),
       React = require('react'),
       reactBackbone = require('reactBackbone'), 
-      TestModel = require('models/TestModel'),
-      json = require('text!vendor/test.json'),
       TestView = require('jsx!views/TestView');
 
   //import the backbone mixins
   reactBackbone(React, Backbone, _, $);
 
   function App() {
-
+    var model = g.testModel;
+    
     var LandingView = React.createClass({ 
       render: function (){ 
         return ( 
@@ -49,7 +49,7 @@ define(function(require){
         if(this.state.step==='initial'){
           return (<LandingView state={this.state} startTest={this.startTest} />);    
         }else{
-          return (<TestView model={this.props.model} step={this.state.step} doResults={this.doResults} />);
+          return (<TestView step={this.state.step} model={model} doResults={this.doResults} />);
         }
       }
     });
@@ -58,12 +58,11 @@ define(function(require){
 
 
   App.prototype.render = function () {
-    // Normally i use model.fetch() but in this case i cant use an ajax call because of the cross-domain policy
-    var model = new TestModel(JSON.parse(json));
+    var model = g.testModel;
         
     //closure to apply callback on react change state. 
     var doCalculation = function(){
-      model.calculateResults();
+      g.testModel.calculateResults();
     };
 
     React.render(<this.AppView model={model} doCalculation={doCalculation} />, $('#main-content')[0]);

@@ -49,6 +49,7 @@ define([
 
             }
             this.set('total'.acum);
+            console.log('total',acum);
         }
     });
 
