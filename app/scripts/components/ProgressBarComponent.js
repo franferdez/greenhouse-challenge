@@ -27,7 +27,7 @@ define(function(require){
             var _this =  this;
             setTimeout(function(){
                _this.setState({
-                percentage: _this.props.percentage
+                percentage: _this.props.percentage || 0
               });
             },1000);
         },

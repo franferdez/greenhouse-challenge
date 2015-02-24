@@ -35,8 +35,8 @@ define(function(require){
           partial = <ProgressBarComponent percentage={model.get('pointsPercentage')} />
         }
         return (<li key={model.get('id')}>
-                                <p>{model.get('title')}</p>
-                                <p>{model.get('text')}</p>
+                                <h3>{model.get('title')}</h3>
+                                <h4>{model.get('text')}</h4>
                                 <OptionsView model={model} step={step}/>
                                 {partial}
                              </li>);
@@ -54,7 +54,7 @@ define(function(require){
         return (
           <RadioGroup name="selected" model={questionModel} bind={true}>
             {optionsCollection.map(function(optionModel) {
-                  return <OptionView id={questionModel.get('id')} answer={questionModel.get('answer')} model={optionModel} step={step} />    
+                  return <OptionView parent={questionModel}  model={optionModel} step={step} />    
             })}
           </RadioGroup>       
         );
@@ -63,15 +63,25 @@ define(function(require){
 
     var OptionView = React.createClass({ 
       render: function () {
-        var questionId = this.props.id,
+        var questionId = this.props.parent.get('id'),
             model = this.props.model,
             step = this.props.step,
             status = '',
             partial = {};
 
-        if(step === '' &&  this.props.answer === model.get('id')){
-            status = ' alert alert-danger';
-            partial = <span className="glyphicon glyphicon-remove" aria-hidden="true" />;
+        if(step === 'results'){
+            // if we are in results step
+            if(this.props.parent.get('correctAnswer') === model.get('id')){
+              //highlight the correct answer
+              status = ' bg-success';
+              partial = <span className="glyphicon glyphicon-ok" aria-hidden="true" />; 
+            }else{
+              if(this.props.parent.get('selected') === model.get('id')){
+                //highlight the wrong answer
+                status = ' bg-danger';
+                partial = <span className="glyphicon glyphicon-remove" aria-hidden="true" />;
+              }
+            }
         }
 
         return (
@@ -81,7 +91,6 @@ define(function(require){
                 {model.get('text')}
               </label>
               {partial}
-              
             </div>
         );
       }

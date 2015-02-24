@@ -90,10 +90,26 @@ body {
     }
 }
 
-
+/*** Stytles ***/
 .bar {
  -webkit-transition: width 2.50s ease !important;
  -moz-transition: width 2.50s ease !important;
    -o-transition: width 2.50s ease !important;
       transition: width 2.50s ease !important;
  }
+
+.glyphicon{
+    margin-left: 10px;
+}
+.glyphicon-remove{
+    color: $brand-danger;
+}
+.glyphicon-ok{
+    color: $brand-success;
+}
+.panel-body{
+    padding: 25px 60px;
+    li{
+        margin-bottom: 40px;
+    }
+}
