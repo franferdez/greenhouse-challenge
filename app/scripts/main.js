@@ -25,7 +25,6 @@ require.config({
         bootstrap: '../bower_components/sass-bootstrap/dist/js/bootstrap',
         react: '../bower_components/react/react-with-addons',
         JSXTransformer: '../bower_components/react/JSXTransformer',
-        backboneMixin: '../bower_components/backbone-react-component/lib/component',
         reactBackbone: '../bower_components/react-backbone/react-backbone-with-deps',
         jsx: '../bower_components/requirejs-react-jsx/jsx',
         text: '../bower_components/requirejs-text/text'

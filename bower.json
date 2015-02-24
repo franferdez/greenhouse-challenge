@@ -11,7 +11,6 @@
     "modernizr": "~2.7.1",
     "react": "~0.12.2",
     "requirejs-react-jsx": "~0.12.0",
-    "backbone-react-component": "~0.7.3",
     "react-backbone": "~0.21.1"
   },
   "devDependencies": {}
