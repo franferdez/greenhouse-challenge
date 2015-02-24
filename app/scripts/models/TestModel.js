@@ -14,25 +14,41 @@ define([
         },
 
         defaults: {
-            id: 0,
+            id: '',
             title: '',
             questions: [],
-            solution: {}
+            solution: {},
+            total: 0
         },
 
         calculateResults: function(){
             console.log('calculation in progress...');
             var questions = this.get('questions').models,
-                value = 0;
+                acum = 0,
+                points = 0,
+                pointsPercentage = 0,
+                question = {},
+                solution = {},
+                correctAnswer = '';
 
+            // for sentence have better performance 
             for (var i = 0, len = questions.length ; i < len; i += 1) {
-                var question = questions[i],
-                    solution  = this.get('solution')[question.get('id')],
-                    //cross-multiplication
-                    points = solution.value * solution.answers[question.get('selected')] / 100;
+                question = questions[i];
+                solution  = this.get('solution')[question.get('id')];
+                pointsPercentage = solution.answers[question.get('selected')];
+                question.set('pointsPercentage',pointsPercentage);
+                    
+                //cross-multiplication to calculate the points
+                points = solution.value * pointsPercentage / 100;
+                question.set('points',points);
+                acum = acum + points;
 
-                    console.log('points', points);
+                // calculate the correct answer
+                // underscore methods have better readability
+                question.set('correctAnswer',_.invert(solution.answers)[100]);
+
             }
+            this.set('total'.acum);
         }
     });
 

@@ -17,7 +17,10 @@ define([
             id: '',
             title: '',
             text: '',
-            selected: '', 
+            selected: '',
+            points: 0,
+            pointsPercentage: 0,
+            correctAnswer: '',  
             options: []
         }
     });
