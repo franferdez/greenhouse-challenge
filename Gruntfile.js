@@ -158,21 +158,14 @@ module.exports = function (grunt) {
                 options: {
                     baseUrl: '<%= yeoman.app %>/scripts',
                     optimize: 'none',
-                    paths: {
-                        'templates': '../../.tmp/scripts/templates',
-                        'jquery': '../../<%= yeoman.app %>/bower_components/jquery/dist/jquery',
-                        'underscore': '../../<%= yeoman.app %>/bower_components/lodash/dist/lodash',
-                        'backbone': '../../<%= yeoman.app %>/bower_components/backbone/backbone'
-                    },
-                    // TODO: Figure out how to make sourcemaps work with grunt-usemin
-                    // https://github.com/yeoman/grunt-usemin/issues/30
-                    //generateSourceMaps: true,
-                    // required to support SourceMaps
-                    // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
+                    generateSourceMaps: true,
                     useStrict: true,
-                    wrap: true
-                    //uglify2: {} // https://github.com/mishoo/UglifyJS2
+                    almond: true,
+                    name: 'main',
+                    out: '<%= yeoman.dist %>/scripts/main.js',
+                    mainConfigFile: '<%= yeoman.app %>/scripts/main.js'
+
                 }
             }
         },
@@ -241,7 +234,8 @@ module.exports = function (grunt) {
                         '*.{ico,txt}',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        'bower_components/sass-bootstrap/fonts/*.*',
+                        'bower_components/requirejs/*.*'
                     ]
                 }, {
                     src: 'node_modules/apache-server-configs/dist/.htaccess',
