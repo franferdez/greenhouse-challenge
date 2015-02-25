@@ -27,14 +27,33 @@ define(function(require){
       }
     });
 
+    
+
+     var ResultView = React.createClass({
+      render: function () {
+        var model = this.props.model;
+
+        return (
+          <div className="row">
+            <div className="col-md-4">
+              <h2>Points: {model.get('points')}</h2>
+            </div>
+            <div className="col-md-8">
+              <ProgressBarComponent percentage={model.get('pointsPercentage')} />
+            </div>
+          </div>
+        );
+      }
+    });
+
     var QuestionView = React.createClass({
       render: function () {
         var step = this.props.step;
         var model = this.props.model;
-        var partial = {};
+        var partial, partial2 = {};
 
         if(step==='results'){
-          partial = <ProgressBarComponent percentage={model.get('points')} />
+          partial = <ResultView model={model} />
         }
         return (<li key={model.get('id')}>
                                 <h3>{model.get('title')}</h3>
@@ -97,7 +116,6 @@ define(function(require){
     });
 
     var TestFooter = React.createClass({
-      mixins: ['modelAware'],
 
       render: function (){
         var model = this.props.model;
@@ -111,7 +129,7 @@ define(function(require){
         }else{
           return(
             <footer className="panel-footer jumbotron">
-              <h2>Total:</h2>
+              <h2>{'Total Points: ' + model.get('total') + ' / 100' }</h2>
               <ProgressBarComponent percentage={model.get('total')} />
             </footer>
           );
