@@ -39,33 +39,36 @@ define(function(require) {
 
 	        it('should get a particular OptionModel', function() {
 				var model = new TestModel(JSON.parse(json));
-	            expect(model.get('questions').get('QUES-1').get('options').get('ANSW-2')).to.be.an.instanceof(OptionModel);
+	            expect(model.get('questions').get('QUES-1').get('options').get('ANSW-1')).to.be.an.instanceof(OptionModel);
 	        });
 
-	        it('OptionModel should have checked field', function() {
-				var model = new TestModel(JSON.parse(json));
-	            expect(model.get('questions').get('QUES-1').get('options').get('ANSW-2').attributes.checked).to.exist;
-	        });
-	 
 	    });
 	    describe("calculateResults", function() {
-	    	it("if you dont choose nothing should add 0 points to the final score"), function(){
-	    		var model = new TestModel(TestModel.prototype.parse(JSON.parse(json))),
-		     		result = model.calculateResults();
-		     	expect(result).to.equal(0);
-	    	}
+	    	
+	    	it("if you dont choose nothing should add 0 points to the final score", function(){
+	    		var model = new TestModel(JSON.parse(json));
+		     		
+		     	model.calculateResults();
+
+		     	expect(model.get('total')).to.equal(0);
+	    	});
+
 		    it("pick ANSW-1 of QUES-1, it should add 40 points to the final score", function() {
-		     	var model = new TestModel(TestModel.prototype.parse(JSON.parse(json))),
-		     		questions = model.get('questions').get('QUES-1').get('options').get('ANSW-1').set('checked',true),
-		     		result = model.calculateResults();
-		     	expect(result).to.equal(40);
+		     	var model = new TestModel(JSON.parse(json));
+		     	
+		     	model.get('questions').get('QUES-1').set('selected','ANSW-1');
+		     	model.calculateResults();
+
+		     	expect(model.get('total')).to.equal(40);
 		    });
 		 
-		    it("if you pick ANSW-2 of QUES-1, it should add 4 points to the final score", function() {
-		    	var model = new TestModel(TestModel.prototype.parse(JSON.parse(json))),
-		     		questions = model.get('questions').get('QUES-1').get('options').get('ANSW-2').set('checked',true),
-		     		result = model.calculateResults();
-		     	expect(result).to.equal(4);
+		    it("if you pick ANSW-2 of QUES-1, it should add 0 points to the final score", function() {
+		    	var model = new TestModel(JSON.parse(json));
+		     	
+		     	model.get('questions').get('QUES-1').set('selected','ANSW-2');
+		     	model.calculateResults();
+
+		     	expect(model.get('total')).to.equal(0);
 
 		    });
 	    });

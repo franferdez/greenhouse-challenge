@@ -22,7 +22,6 @@ define([
         },
 
         calculateResults: function(){
-            console.log('calculation in progress...');
             var questions = this.get('questions').models,
                 acum = 0,
                 points = 0,
@@ -35,11 +34,11 @@ define([
             for (var i = 0, len = questions.length ; i < len; i += 1) {
                 question = questions[i];
                 solution  = this.get('solution')[question.get('id')];
-                pointsPercentage = solution.answers[question.get('selected')];
+                pointsPercentage = solution.answers[question.get('selected')] || 0;
                 question.set('pointsPercentage',pointsPercentage);
                     
                 //cross-multiplication to calculate the points
-                points = solution.value * pointsPercentage / 100;
+                points = (solution.value * pointsPercentage / 100) ;
                 question.set('points',points);
                 acum = acum + points;
 

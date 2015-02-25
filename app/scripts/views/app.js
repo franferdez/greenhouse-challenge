@@ -58,8 +58,7 @@ define(function(require){
 
   App.prototype.render = function () {
     var model = g.testModel;
-        
-
+    
     React.render(<this.AppView model={model} />, $('#main-content')[0]);
   };
 
